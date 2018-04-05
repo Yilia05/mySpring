@@ -1,5 +1,7 @@
 package myIOC;
 
+import myIOC.factory.AutowireCapableBeanFactory;
+import myIOC.factory.BeanFactory;
 import org.junit.Test;
 
 /**
@@ -9,13 +11,17 @@ public class BeanFactoryTest {
 
   @Test
   public void test() {
-    String name = "helloService";
-    BeanFactory beanFactory = new BeanFactory();
+    // init beanFactory
+    BeanFactory beanFactory = new AutowireCapableBeanFactory();
 
-    BeanDefinition beanDefinition = new BeanDefinition(HelloService.class);
-    beanFactory.registerBeanDefinition(name, beanDefinition);
+    // set bean
+    BeanDefinition beanDefinition = new BeanDefinition();
+    beanDefinition.setBeanClassName("myIOC.HelloService");
+    beanFactory.registerBeanDefinition("helloService", beanDefinition);
 
-    HelloService helloService = (HelloService) beanFactory.getBean(name);
+    // get bean
+    HelloService helloService = (HelloService) beanFactory.getBean("helloService");
+    helloService.helloService();
 
   }
 
