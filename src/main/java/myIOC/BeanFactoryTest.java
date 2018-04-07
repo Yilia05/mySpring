@@ -10,13 +10,20 @@ import org.junit.Test;
 public class BeanFactoryTest {
 
   @Test
-  public void test() {
+  public void test() throws Exception {
     // init beanFactory
     BeanFactory beanFactory = new AutowireCapableBeanFactory();
 
-    // set bean
+    // set bean definition
     BeanDefinition beanDefinition = new BeanDefinition();
     beanDefinition.setBeanClassName("myIOC.HelloService");
+
+    // set property
+    PropertyValues propertyValues = new PropertyValues();
+    propertyValues.addPropertyValue(new PropertyValue("text", "Hello World"));
+    beanDefinition.setPropertyValues(propertyValues);
+
+    // init bean
     beanFactory.registerBeanDefinition("helloService", beanDefinition);
 
     // get bean
