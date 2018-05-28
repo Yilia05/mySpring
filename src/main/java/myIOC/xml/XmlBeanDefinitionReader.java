@@ -6,6 +6,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import myIOC.AbstractBeanDefinitionReader;
 import myIOC.BeanDefinition;
+import myIOC.BeanReference;
 import myIOC.PropertyValue;
 import myIOC.io.ResourceLoader;
 
@@ -63,7 +64,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader{
     getRegistry().put(name, beanDefinition);
   }
 
-  private void processProperty(Element ele,BeanDefinition beanDefinition) {
+  private void processProperty(Element ele, BeanDefinition beanDefinition) {
     NodeList propertyNode = ele.getElementsByTagName("property");
     for (int i = 0; i < propertyNode.getLength(); i++) {
       Node node = propertyNode.item(i);
@@ -71,7 +72,17 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader{
         Element propertyEle = (Element) node;
         String name = propertyEle.getAttribute("name");
         String value = propertyEle.getAttribute("value");
-        beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name,value));
+        if (value != null && value.length() > 0) {
+          beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, value));
+        } else {
+          String ref = propertyEle.getAttribute("ref");
+          if (ref == null || ref.length() == 0) {
+            throw new IllegalArgumentException("Configuration problem: <property> element for property '"
+                + name + "' must specify a ref or value");
+          }
+          BeanReference beanReference = new BeanReference(ref);
+          beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, beanReference));
+        }
       }
     }
   }
