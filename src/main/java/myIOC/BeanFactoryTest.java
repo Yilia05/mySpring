@@ -1,11 +1,11 @@
 package myIOC;
 
 import java.util.Map;
-import myIOC.factory.AbstractBeanFactory;
-import myIOC.factory.AutowireCapableBeanFactory;
-import myIOC.factory.BeanFactory;
-import myIOC.io.ResourceLoader;
-import myIOC.xml.XmlBeanDefinitionReader;
+import myIOC.beans.BeanDefinition;
+import myIOC.beans.factory.AbstractBeanFactory;
+import myIOC.beans.factory.AutowireCapableBeanFactory;
+import myIOC.beans.io.ResourceLoader;
+import myIOC.beans.xml.XmlBeanDefinitionReader;
 import org.junit.Test;
 
 /**
