@@ -12,7 +12,7 @@
     <property name="helloService" ref="helloService"></property>
   </bean>
 
-  <bean name="helloService" class="myIOC.HelloService">
+  <bean name="helloService" class="myIOC.HelloServiceImpl">
     <property name="text" value="Hello World!"></property>
     <property name = "outputService" ref="outputService"></property>
   </bean>
