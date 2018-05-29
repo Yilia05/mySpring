@@ -8,9 +8,9 @@ import org.aopalliance.intercept.MethodInvocation;
  * Created by Yilia on 2018/5/28.
  */
 public class ReflectiveMethodInvocation implements MethodInvocation{
-  private Object target;
-  private Method method;
-  private Object[] args;
+  protected Object target;
+  protected Method method;
+  protected Object[] args;
 
   public ReflectiveMethodInvocation(Object target, Method method, Object[] args) {
     this.target = target;
