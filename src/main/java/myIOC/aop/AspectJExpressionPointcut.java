@@ -12,7 +12,6 @@ import java.util.Set;
  * Created by Yilia on 2018/5/28.
  */
 public class AspectJExpressionPointcut implements Pointcut, ClassFilter, MethodMatcher {
-
   private PointcutParser pointcutParser;
 
   private String expression;
